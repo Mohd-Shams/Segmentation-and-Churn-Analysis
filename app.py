@@ -12,8 +12,8 @@ scaler = joblib.load("scaler.pkl")
 # Page config
 st.set_page_config(page_title="Customer Segmentation & Churn", page_icon="📊", layout="wide")
 
-# App title
-st.markdown("<h1 style='text-align: center; color: #4B0082;'>Customer Segmentation & Churn Prediction</h1>", unsafe_allow_html=True)
+# App title (theme-friendly)
+st.title("Customer Segmentation & Churn Prediction")
 st.markdown("---")
 
 # Input section in columns
@@ -68,18 +68,23 @@ if st.button("Predict 🚀"):
     res_col1, res_col2 = st.columns(2)
 
     with res_col1:
-        st.markdown(f"<div style='padding: 15px; background-color:#ffcccc; border-radius:10px; text-align:center;'>"
-                    f"<h3>Segment</h3>"
-                    f"<h2 style='color:#800000;'>{segment_name}</h2></div>", unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style='padding:15px; background-color:#ffcccc; border-radius:10px; text-align:center;'>
+            <h3 style="color:black;">Segment</h3>
+            <h2 style='color:#800000;'>{segment_name}</h2>
+        </div>
+        """, unsafe_allow_html=True)
 
     with res_col2:
         color = "#ff0000" if churn_prob>0.7 else "#ffa500" if churn_prob>0.4 else "#32cd32"
-        st.markdown(f"<div style='padding: 15px; background-color:#f0f8ff; border-radius:10px; text-align:center;'>"
-                    f"<h3>Churn Probability</h3>"
-                    f"<h2 style='color:{color};'>{churn_prob:.2f}</h2></div>", unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style='padding:15px; background-color:#f0f8ff; border-radius:10px; text-align:center;'>
+            <h3 style="color:black;">Churn Probability</h3>
+            <h2 style='color:{color};'>{churn_prob:.2f}</h2>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Suggested actions
-    # Suggested actions (styled card)
     st.markdown("### Suggested Actions")
 
     if segment_name == 'Loyal':
